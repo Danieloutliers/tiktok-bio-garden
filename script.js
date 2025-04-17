@@ -1,4 +1,3 @@
-
 // Tab switching functionality
 document.addEventListener('DOMContentLoaded', function() {
   // Set current year in footer
@@ -14,6 +13,33 @@ document.addEventListener('DOMContentLoaded', function() {
       const linkName = this.textContent.trim();
       console.log(`Link clicked: ${linkName}`);
       // Here you could add analytics tracking if desired
+    });
+  });
+
+  // Adiciona manipulador para links secretos
+  document.querySelectorAll('[data-secret-link]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Ofuscação do link usando uma técnica simples
+      const secretLinks = {
+        'sorteio-iphone': Array.from('www.sorteio.com').map(char => 
+          String.fromCharCode(char.charCodeAt(0) + 1)
+        ).join('')
+      };
+      
+      // Decodifica e redireciona
+      const linkId = this.getAttribute('data-secret-link');
+      if (linkId && secretLinks[linkId]) {
+        const realLink = Array.from(secretLinks[linkId]).map(char => 
+          String.fromCharCode(char.charCodeAt(0) - 1)
+        ).join('');
+        
+        // Pequeno atraso para dificultar ainda mais a detecção
+        setTimeout(() => {
+          window.location.href = 'https://' + realLink;
+        }, Math.random() * 100);
+      }
     });
   });
 
