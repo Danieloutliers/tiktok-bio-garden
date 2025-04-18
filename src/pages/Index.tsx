@@ -1,9 +1,11 @@
+
 import { Instagram, Youtube, Twitter, Mail, Globe } from "lucide-react";
 import LinkTree from "@/components/LinkTree";
 import Profile from "@/components/Profile";
 import LinkButton from "@/components/LinkButton";
 import SocialIcons from "@/components/SocialIcons";
 import Sorteios from "@/components/Sorteios";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   // Replace with your actual information
@@ -83,15 +85,42 @@ const Index = () => {
           name={profileInfo.name} 
           description={profileInfo.description} 
           avatarUrl={profileInfo.avatarUrl}
-          className="mb-8"
+          className="mb-4"
         />
       </div>
 
-      <Sorteios />
+      <Tabs defaultValue="sorteios" className="w-full mb-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="sorteios">Sorteios</TabsTrigger>
+          <TabsTrigger value="links">Links</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="sorteios" className="mt-4">
+          <div className="animate-fade-in">
+            <Sorteios />
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="links" className="mt-4">
+          <div className="space-y-3">
+            {links.map((link, index) => (
+              <LinkButton
+                key={index}
+                href={link.href}
+                icon={link.icon}
+                className={`link-animation ${link.className || ""}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {link.label}
+              </LinkButton>
+            ))}
+          </div>
+        </TabsContent>
+      </Tabs>
 
-      <SocialIcons links={socialLinks} className="mt-8" />
+      <SocialIcons links={socialLinks} className="mt-6" />
 
-      <div className="text-center mt-10">
+      <div className="text-center mt-8">
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} {profileInfo.name}</p>
         <div className="mt-2 flex items-center justify-center">
           <div className="h-0.5 w-6 bg-gradient-to-r from-primary to-secondary"></div>
