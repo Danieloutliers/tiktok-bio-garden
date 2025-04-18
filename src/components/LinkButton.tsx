@@ -5,7 +5,7 @@ import { HTMLAttributeAnchorTarget } from "react";
 interface LinkButtonProps {
   href: string;
   icon?: React.ReactNode;
-  label: string;
+  children: React.ReactNode; // Changed from 'label' to 'children'
   className?: string;
   target?: HTMLAttributeAnchorTarget;
 }
@@ -13,7 +13,7 @@ interface LinkButtonProps {
 const LinkButton = ({ 
   href, 
   icon, 
-  label, 
+  children, // Changed from 'label' to 'children'
   className,
   target = "_blank" 
 }: LinkButtonProps) => {
@@ -31,7 +31,7 @@ const LinkButton = ({
       )}
     >
       {icon && <span className="text-primary">{icon}</span>}
-      <span>{label}</span>
+      <span>{children}</span>
     </a>
   );
 };
