@@ -1,9 +1,9 @@
-
 import { Instagram, Youtube, Twitter, Mail, Globe } from "lucide-react";
 import LinkTree from "@/components/LinkTree";
 import Profile from "@/components/Profile";
 import LinkButton from "@/components/LinkButton";
 import SocialIcons from "@/components/SocialIcons";
+import Sorteios from "@/components/Sorteios";
 
 const Index = () => {
   // Replace with your actual information
@@ -87,18 +87,7 @@ const Index = () => {
         />
       </div>
 
-      <div className="space-y-3">
-        {links.map((link, index) => (
-          <div key={index} className="link-animation">
-            <LinkButton 
-              href={link.href}
-              label={link.label}
-              icon={link.icon}
-              className={link.className}
-            />
-          </div>
-        ))}
-      </div>
+      <Sorteios />
 
       <SocialIcons links={socialLinks} className="mt-8" />
 
